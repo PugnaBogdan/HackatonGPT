@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import Wave from 'react-wavify';
+import AppPlayer from './AppPlayer';
+
 function App() {
   const [inputText, setInputText] = useState('');
 
@@ -38,6 +40,7 @@ function App() {
     <div className="containert">
       <div className="top-image"></div>
         <div className="comment-containert">
+        <div className="sound"><AppPlayer/></div>
           <div className="textarea-containert">
             <div className="relative mt-2 flex items-center">
               <input type="text" height = "100px" name="search" placeholder="What do you want to listen?" className="block w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-red focus:ring-2 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6 my-input"/>
