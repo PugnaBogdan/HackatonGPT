@@ -14,6 +14,11 @@
   }
 }
 
+@font-face {
+  font-family: 'Gothic'; /*a name to be used later*/
+  src: url('D:\Code\HackatonGPT\Fonts\GOTHIC.TTF'); /*URL to font*/
+}
+
 .App-header {
   background-color: #09101f;
   min-height: 100vh;
@@ -37,33 +42,13 @@
     transform: rotate(360deg);
   }
 }
-.containert {
+/* .containert {
   padding-top: 5%;
   display: flex;
   justify-content: space-between;
 }
 
-.comment-containert {
-  padding-left: 10%;
-  max-width: 40vw;
-  display: inline-block;
-  flex: 1; 
-  padding-right: 10px; 
-}
 
-.textarea-containert {
-  background-color: transparent;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.textarea-containert textarea{
-  background-color: #ffffff30;
-}
-
-.button-containert {
-  align-self: flex-end;
-}
 
 .card-containert {
   padding-right: 10%;
@@ -83,4 +68,68 @@
   width: 100%;
   max-width: auto; 
   margin-top: 1rem;
+} */
+.containert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative; /* Added positioning */
+}
+.comment-containert{
+  bottom: auto;
+}
+.textarea-containert input{
+  background-color: #ffffff30;
+  font-size: 20pt;
+  margin-top: 5px;
+  padding-bottom: 10px;
+}
+
+.textarea-containert {
+  background-color: transparent;
+  width: 50vw;
+  bottom: 10px;
+
+}
+
+.button-containert {
+  background-color: transparent;
+  align-self: flex-end;
+}
+.comment-containert{
+  margin-top: auto;
+  padding-bottom: 10%;
+}
+.button-containert button{
+  background-color: transparent;
+  background-image: url('D:\Code\HackatonGPT\Images\sageata.png');
+  width: 48px;
+  height: 46px;
+  
+}
+
+.my-input {
+  font-family: 'Gothic';
+  color:  rgb(58, 50, 50);
+}
+
+.top-image {
+  position: absolute; /* Added positioning */
+  top: 40px; /* Position at the top */
+  left: 50%; /* Position at the horizontal center */
+  transform: translateX(-50%); /* Center horizontally */
+  width: 255px; /* Adjust the width as per your requirement */
+  height: 200px; /* Adjust the height as per your requirement */
+  background-image: url('D:\Code\HackatonGPT\Images\hAI-team-logo_2@1.5x.png'); /* Replace 'your-image-url.jpg' with the actual image URL */
+  background-size: cover;
+  background-position: center;
+  z-index: 1; /* Set a higher z-index to ensure it appears on top */
+  scale: 1.1;
+  flex: 1;
+}
+
+.wavey {
+  width: 100vw;
 }

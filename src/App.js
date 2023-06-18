@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-
+import Wave from 'react-wavify';
 function App() {
   const [inputText, setInputText] = useState('');
 
@@ -36,34 +36,41 @@ function App() {
 
   return (
     <div className="containert">
-      <div className="comment-containert">
-        <div className="textarea-containert">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Add your comment
-          </label>
-          <div className="mt-2">
-            <textarea
-              rows="4"
-              name="comment"
-              id="comment"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            ></textarea>
+      <div className="top-image"></div>
+        <div className="comment-containert">
+          <div className="textarea-containert">
+            <div className="relative mt-2 flex items-center">
+              <input type="text" height = "100px" name="search" placeholder="What do you want to listen?" className="block w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-red focus:ring-2 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6 my-input"/>
+                <div className="button-containert">
+                  <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+                    <button
+                      onClick={handlePress}
+                      type="button"
+                      className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white"
+                    >
+                    </button>    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div className="wavey">
+              <Wave mask="url(#mask)" fill="#1277b0" 
+              amplitude={60} height={20}>
+                <defs>
+                  <linearGradient id="gradient" gradientTransform="rotate(90)">
+                    <stop offset="0" stopColor="white" />
+                    <stop offset="0.5" stopColor="black" />
+                  </linearGradient>
+                  <mask id="mask">
+                    <rect x="0" y="0" width="100vw" height="200" fill="url(#gradient)"  />
+                  </mask>
+                </defs>
+              </Wave>
           </div>
         </div>
-        <div className="button-containert">
-          <button
-            onClick={handlePress}
-            type="button"
-            className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Submit
-          </button>
-        </div>
-      </div>
 
-    {/* <div className="card-containert">
+        /* <div className="card-containert">
       <div className="card flex flex-col items-center bg-gradient-to-tr from-blue-400 to-red-400 text-xl font-mono p-4 rounded-md text-white">
         <div className="cover flex flex-col items-center">
         </div>
@@ -74,8 +81,7 @@ function App() {
         </div>
         This is a music card
       </div>
-    </div> */}
-    </div>
+    </div> */
   );
 }
 

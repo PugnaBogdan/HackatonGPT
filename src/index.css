@@ -9,6 +9,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /*background-color: #1A1A1A;*/
+  gap: 32px;
+
+  position: relative;
 }
 
 code {
