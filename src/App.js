@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import Wave from 'react-wavify';
 import AppPlayer from './AppPlayer';
 
 function App() {
   const [inputText, setInputText] = useState('');
+  const [showPlayer, setShowPlayer] = useState(false);
+  const [wavPath, setWavPath] = useState("demo.wav");
+  const audioRef = useRef(null); // Add this line
 
   var html = document.querySelector('html');
 
@@ -14,6 +17,10 @@ function App() {
   html.classList.add('to-red-400');
 
   const handlePress = async () => {
+    setShowPlayer(true);
+    console.log(inputText);
+    if (inputText !== 'a pop song for waiting calmly in a hallway') {
+      console.log("bah");
     try {
       let response = await fetch('http://localhost:5000/text_to_speech', {
         method: 'POST',
@@ -29,22 +36,47 @@ function App() {
 
       let audioBlob = await response.blob();
       let audioUrl = URL.createObjectURL(audioBlob);
-      let audio = new Audio(audioUrl);
-      audio.play();
+      setWavPath(wavPath); // Save the object URL for use in the audio player
+      
     } catch (error) {
       console.log("Fetch or audio playback failed: ", error);
     }
+  }
+ 
+  // if (audioRef.current) {
+  //   audioRef.current.load(); // We need to reload the audio player to make sure the new source is used
+  //   audioRef.current.play(); 
+  // }
   };
+
+  useEffect(() => {
+    console.log("play",audioRef.current);
+    if (showPlayer && wavPath) {
+      if (audioRef.current) {
+        audioRef.current.load();
+        audioRef.current.play();
+      }
+    }
+  }, [showPlayer, wavPath]);
 
   return (
     <div className="containert">
       <div className="top-image"></div>
         <div className="comment-containert">
-        <div className="sound"><AppPlayer/></div>
+        {showPlayer && (
+            <div className="sound"><AppPlayer ref={audioRef} src={wavPath}/></div>
+      )}   
           <div className="textarea-containert">
             <div className="relative mt-2 flex items-center">
-              <input type="text" height = "100px" name="search" placeholder="What do you want to listen?" className="block w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-red focus:ring-2 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6 my-input"/>
-                <div className="button-containert">
+            <input 
+              type="text"
+              name="search"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="What do you want to listen?"
+              className="block w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-red focus:ring-2 focus:ring-inset focus:ring-gray-300 sm:text-sm sm:leading-6 my-input"
+            />
+            <div className="button-containert">
                   <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
                     <button
                       onClick={handlePress}

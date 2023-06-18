@@ -7,11 +7,11 @@ model.set_generation_params(duration=8)  # generate 8 seconds.
 
 descriptions = ['happy rock', 'energetic EDM', 'sad jazz']
 
-melody, sr = torchaudio.load('./assets/bach.mp3')
+# melody, sr = torchaudio.load('./assets/bach.mp3')
 # generates using the melody from the given audio and the provided descriptions.
 def generateSong(text): 
     print("generate music for:", text)
-    wav = model.generate_with_chroma([text], melody[None], sr)
+    wav = model.generate([text])
 
     for idx, one_wav in enumerate(wav): 
     # Will save under {idx}.wav, with loudness normalization at -14 db LUFS.

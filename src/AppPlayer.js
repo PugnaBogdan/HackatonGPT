@@ -470,10 +470,11 @@ class AudioPlayer extends HTMLElement {
   customElements.define('audio-player', AudioPlayer);
 }
 
-function AppPlayer() {
+function AppPlayer({ref, src}) {
   
     return <audio-player
-    src={audio}
+    src={src}
+    ref = {ref}
     bar-width="5"
     bar-gap="2"
     preload autoplay

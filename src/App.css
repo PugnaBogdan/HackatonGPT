@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: 'Gothic'; /*a name to be used later*/
-  src: url('E:\Hackaton\HackatonGPT\Fonts\GOTHIC.TTF'); /*URL to font*/
+  src: url('../Fonts/GOTHIC.TTF'); /*URL to font*/
 }
 
 .App-header {
@@ -104,7 +104,7 @@
 }
 .button-containert button{
   background-color: transparent;
-  background-image: url('E:\Hackaton\HackatonGPT\Images\sageata.png');
+  background-image: url('../Images/sageata.png');
   width: 48px;
   height: 46px;
   
@@ -122,7 +122,7 @@
   transform: translateX(-50%); /* Center horizontally */
   width: 255px; /* Adjust the width as per your requirement */
   height: 200px; /* Adjust the height as per your requirement */
-  background-image: url('E:\Hackaton\HackatonGPT\Images\hAI-team-logo_2@1.5x.png'); /* Replace 'your-image-url.jpg' with the actual image URL */
+  background-image: url('../Images/hAI-team-logo_2@1.5x.png'); /* Replace 'your-image-url.jpg' with the actual image URL */
   background-size: cover;
   background-position: center;
   z-index: 1; /* Set a higher z-index to ensure it appears on top */

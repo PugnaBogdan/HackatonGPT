@@ -16,7 +16,7 @@ def text_to_speech():
     
     generateSong(text)
     # Ensure file is read in binary mode
-    return send_file("2.wav", mimetype='audio/wav', as_attachment=True)
+    return send_file("0.wav", mimetype='audio/wav', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
