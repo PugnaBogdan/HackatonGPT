@@ -90,7 +90,7 @@ function App() {
             </div>
           </div>
             <div className="wavey">
-              <Wave mask="url(#mask)" fill="#1277b0" 
+              <Wave mask="url(#mask)" fill="#62e7ff" 
               amplitude={60} height={20}>
                 <defs>
                   <linearGradient id="gradient" gradientTransform="rotate(90)">

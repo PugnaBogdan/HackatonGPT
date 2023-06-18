@@ -108,6 +108,8 @@ class AudioPlayer extends HTMLElement {
       
       this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height)
       this.canvasCtx.fillStyle = "rgba(0, 0, 0, 0)";
+      
+
       this.canvasCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       
       const barCount = (this.canvas.width / (this.barWidth + this.barGap)) - this.barGap;
@@ -130,6 +132,14 @@ class AudioPlayer extends HTMLElement {
         const y = this.canvas.height - barHeight;
         
         this.canvasCtx.fillStyle = `rgba(${255 - frequency * 0.5}, ${100 + frequency }, ${50 + frequency})`;
+
+        let gradient = this.canvasCtx.createLinearGradient(x, y, x + this.barWidth, y + barHeight);
+        gradient.addColorStop(0, `rgba(${255 - frequency * 0.5}, ${100 + frequency }, ${150 + frequency})`);
+        gradient.addColorStop(.3, `rgba(${255 - frequency * 0.5}, ${100 + frequency }, ${100 + frequency})`);
+        gradient.addColorStop(1, `rgba(${255 - frequency * 0.5}, ${100 + frequency }, ${50 + frequency}, 0)`);
+        
+        this.canvasCtx.fillStyle = gradient;
+
         this.canvasCtx.fillRect(x, y, this.barWidth, barHeight);
         
         x += (this.barWidth + this.barGap);
