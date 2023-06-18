@@ -34,7 +34,7 @@ class AudioPlayer extends HTMLElement {
         // the percentage of the frequency buffer data to represent
         // if the dataArray contains 1024 data points only a percentage of data will
         // be used to draw on the canvas
-        'buffer-percentage'
+        'buffer-percentage', 'ref'
       ];
     }
     
@@ -60,6 +60,8 @@ class AudioPlayer extends HTMLElement {
         case 'buffer-percentage':
           this.bufferPercentage = Number(newValue) || 75;
           break;
+        case 'ref':
+          this.id = "awesome_wave_bar";
         default:
       }
       
@@ -77,6 +79,12 @@ class AudioPlayer extends HTMLElement {
         this.audio.removeAttribute(name);
       }
     }
+
+    setsource(newSrc) {
+      console.log("AMAJUNS");
+      this.audio.src = newSrc;
+      this.audio.load();
+    }
     
     initializeAudio() {
       if (this.initialized) return;
@@ -87,6 +95,7 @@ class AudioPlayer extends HTMLElement {
       this.gainNode = this.audioCtx.createGain();
       this.analyserNode = this.audioCtx.createAnalyser();
       this.track = this.audioCtx.createMediaElementSource(this.audio);
+      console.log(this.audio, audio);
       
       this.analyserNode.fftSize = 2048;
       this.bufferLength = this.analyserNode.frequencyBinCount;
@@ -480,14 +489,13 @@ class AudioPlayer extends HTMLElement {
   customElements.define('audio-player', AudioPlayer);
 }
 
-function AppPlayer({ref, src}) {
+function AppPlayer(props) {
   
     return <audio-player
-    src={src}
-    ref = {ref}
+    src={props.src}
     bar-width="5"
     bar-gap="2"
-    preload autoplay
+    preload autoplay loop
      ></audio-player>
 
 }

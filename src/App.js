@@ -7,7 +7,6 @@ function App() {
   const [inputText, setInputText] = useState('');
   const [showPlayer, setShowPlayer] = useState(false);
   const [wavPath, setWavPath] = useState("demo.wav");
-  const audioRef = useRef(null); // Add this line
 
   var html = document.querySelector('html');
 
@@ -17,10 +16,19 @@ function App() {
   html.classList.add('to-red-400');
 
   const handlePress = async () => {
-    setShowPlayer(true);
-    console.log(inputText);
-    if (inputText !== 'a pop song for waiting calmly in a hallway') {
+    
+
+    if (inputText === 'a pop song for waiting calmly in a hallway') {
       console.log("bah");
+      setWavPath("demo.wav");
+      setShowPlayer(true);
+    }
+    else if (inputText === 'death metal') {
+      console.log("bah");
+      setWavPath("death_metal.wav");
+      setShowPlayer(true);
+    }
+    else {
     try {
       let response = await fetch('http://localhost:5000/text_to_speech', {
         method: 'POST',
@@ -36,11 +44,13 @@ function App() {
 
       let audioBlob = await response.blob();
       let audioUrl = URL.createObjectURL(audioBlob);
-      setWavPath(wavPath); // Save the object URL for use in the audio player
+      setWavPath(audioUrl); // Save the object URL for use in the audio player
+      setShowPlayer(true);
       
     } catch (error) {
       console.log("Fetch or audio playback failed: ", error);
     }
+
   }
  
   // if (audioRef.current) {
@@ -50,11 +60,12 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("play",audioRef.current);
-    if (showPlayer && wavPath) {
-      if (audioRef.current) {
-        audioRef.current.load();
-        audioRef.current.play();
+    let audioplayer = document.querySelector('audio-player');
+    console.log("play",audioplayer);
+    if (showPlayer || wavPath) {
+      if (audioplayer) {
+        console.log(wavPath);
+        audioplayer.setsource(wavPath);
       }
     }
   }, [showPlayer, wavPath]);
@@ -64,7 +75,7 @@ function App() {
       <div className="top-image"></div>
         <div className="comment-containert">
         {showPlayer && (
-            <div className="sound"><AppPlayer ref={audioRef} src={wavPath}/></div>
+            <div className="sound"><AppPlayer src={wavPath}/></div>
       )}   
           <div className="textarea-containert">
             <div className="relative mt-2 flex items-center">
